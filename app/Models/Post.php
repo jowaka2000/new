@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Post extends Model
 {
@@ -22,17 +23,16 @@ class Post extends Model
 
 
 
+
     public function getRouteKeyName()
     {
         return 'search_id';
     }
 
     public function scopeTrendingPosts($query){
-        $query = $query->where('trending',true)->limit(6)->get();
 
-        if(count($query)==0){
-            $query= Post::latest()->limit(4)->get();
-        }
+        $query= Post::where('trending',true)->latest()->limit(4)->get();
+
 
         return $query;
     }
@@ -40,7 +40,7 @@ class Post extends Model
 
     public function scopeAllPosts($query){
 
-        $query = $query->where('trending',false)->latest()->get();
+        $query = $query->latest()->get();
 
 
         // if(Post::where('trending',true)->get()->count()==0){

@@ -26,7 +26,9 @@ class PostsFileUploadAction
 
             // upload files
 
-            Storage::putFileAs('public/posts',$file,$fileName);
+            $file->move(public_path('items/'),$fileName);
+
+            // Storage::putFileAs('public/posts',$file,$fileName);
         }
     }
 }

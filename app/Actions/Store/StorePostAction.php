@@ -5,10 +5,12 @@ namespace App\Actions\Store;
 use App\Http\Requests\CreatePostRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Crypt;
+use Intervention\Image\Image;
 
 class StorePostAction
 {
     public function execute(CreatePostRequest $request,User $user){
+
 
         $trending=false;
         if($request->trending){
@@ -28,6 +30,7 @@ class StorePostAction
 
         $post->update(['search_id'=>$search_id]);
 
+        $string = 'student\'s books';
         return $post;
     }
 }
