@@ -17,14 +17,16 @@ class PostsController extends Controller
 
     public function __construct()
     {
-        return $this->middleware(['auth'])->except('index');
+        return $this->middleware(['auth'])->except(['index','show']);
     }
     public function index(){
 
-        $post = Post::find(1);
 
         $trending = Post::trendingPosts();
+
         $posts = Post::allPosts();
+
+    
         return view('posts.test-index',compact('posts','trending'));
     }
 
